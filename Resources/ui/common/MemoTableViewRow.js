@@ -8,10 +8,9 @@ var MemoRow = function(memo) {
 	var imageview = Ti.UI.createImageView({
 		image: 'images/35.png',
 		height: 42,
-		width: 68,
+		width: 42,
 		left: 5,
-		top: 3,
-		visible: true
+		top: 3
 	});
 	var titleview = Ti.UI.createLabel({
 		text: memo.content,

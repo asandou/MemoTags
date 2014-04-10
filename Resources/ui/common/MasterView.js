@@ -7,16 +7,12 @@ function MasterView() {
 		backgroundColor:'white'
 	});
 
-	var table = Ti.UI.createTableView({
-		data:tableData
-	});
+	var table = Ti.UI.createTableView();
 	self.add(table);
 
 	//add behavior
 	table.addEventListener('click', function(e) {
-		self.fireEvent('itemSelected', function(e) {
-			console.log('click triple click !!');
-		});
+		console.log('click triple click !!');
 	});
 	
 	self.refreshMemoTable = function(data) {
