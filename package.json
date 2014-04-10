@@ -1,0 +1,33 @@
+{
+  "name": "MemoTags",
+  "version": "0.0.1",
+  "description": "Welcome to MemoTags Mobile Project",
+  "main": "app.js",
+  "directories": {
+    "test": "test",
+    "src": "src",
+    "ui": "ui",
+    "images": "Resources/images"
+  },
+  "dependencies": {
+    "chai": "~1.9.1",
+    "expect": "~0.1.1",
+    "should": "~3.2.0",
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asandou/MemoTags.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/asandou/MemoTags/issues"
+  }
+}

@@ -1,0 +1,13 @@
+build
+build.log
+tmp
+._*
+.DS_Store
+app/assets
+tiapp.xml
+manifest
+node_modules
+Resources/android
+Resources/iphone
+Resources/mobileweb
+Resources/KS_*
