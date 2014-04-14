@@ -2,7 +2,7 @@ function ApplicationWindow() {
 	//declare module dependencies
 	var MasterView = require('ui/common/MasterView'),
 		DetailView = require('ui/common/DetailView'),
-		Memo = require('src/memo');
+		Memo = require('src/Memo');
 
 	//construct UI
 	var masterView = MasterView(),

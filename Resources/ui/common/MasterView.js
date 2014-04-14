@@ -1,6 +1,6 @@
 //Master View Component Constructor
 function MasterView() {
-	var MemoRow = require('ui/common/memotableviewrow');
+	var MemoRow = require('ui/common/MemoTableViewRow');
 	
 	//create object instance, parasitic subclass of Observable
 	var self = Ti.UI.createView({
