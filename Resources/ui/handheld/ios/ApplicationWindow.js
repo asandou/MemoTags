@@ -25,6 +25,7 @@ function ApplicationWindow() {
 
 	var newMemoButton = Ti.UI.createButton({
 		image: 'images/35.png',
+		title: 'New Memo',
 		height: 45,
 		width: 45,
 		left: 45,
@@ -42,7 +43,7 @@ function ApplicationWindow() {
 		refreshMemo();
 	});
 	masterContainerWindow.rightNavButton = button;
-
+	
 	//create detail view container
 	var detailContainerWindow = Ti.UI.createWindow({
 		title: 'Memo detail'

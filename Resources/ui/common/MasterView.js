@@ -7,7 +7,9 @@ function MasterView() {
 		backgroundColor:'white'
 	});
 
-	var table = Ti.UI.createTableView();
+	var table = Ti.UI.createTableView({
+		top: 55
+	});
 	self.add(table);
 
 	//add behavior
