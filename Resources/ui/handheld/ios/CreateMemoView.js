@@ -1,5 +1,5 @@
 
-function CreateMemoView(memos) {
+function CreateMemoView(closeCurrentWindow, refresh, memos) {
 	var Memo = require('src/Memo');
 	
 	var self = Ti.UI.createView({
@@ -30,17 +30,16 @@ function CreateMemoView(memos) {
 	});
 	createButton.addEventListener('click', function() {
 		var memo = new Memo('user', editBox.getValue(), ['tag1', 'tag2']);
-		console.log('Memo created : ' + memo.content);
 		memos.push(memo);
+		editBox.setValue('');
+		refresh(memos);
+		closeCurrentWindow();
 	});
 	self.add(createButton);
 	
-	var cancelButton = Ti.UI.createButton({
-		systemButton: Ti.UI.iPhone.SystemButton.CANCEL
-	});
-	self.add(cancelButton);
-	
 	return self;
 };
+
+
 
 module.exports = CreateMemoView;
