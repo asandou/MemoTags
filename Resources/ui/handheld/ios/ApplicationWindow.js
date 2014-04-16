@@ -13,7 +13,10 @@ function ApplicationWindow() {
 
 	//create master view container
 	var masterContainerWindow = Ti.UI.createWindow({
-		title:'Welcome to MemoTags'
+		title:'Welcome to MemoTags',
+		backgroundColor:'e3e3e3',
+		navTintColor: 'e3e3e3'
+		//navBarHidden: true
 	});
 	masterContainerWindow.add(masterView);
 	
@@ -23,8 +26,7 @@ function ApplicationWindow() {
 	});
 
 	var createMemoTagsWindow = Ti.UI.createWindow({
-		title: 'Create new memo',
-		barColor:'#000' //set this too
+		title: 'Create new memo'
 	});
 	var backCreateMemoButton = Ti.UI.createButton({
 		title: '< Back'
@@ -40,25 +42,17 @@ function ApplicationWindow() {
 	createMemoTagsWindow.add(createMemoView);
 
 	var newMemoButton = Ti.UI.createButton({
-		image: 'images/35.png',
-		title: 'New Memo',
-		height: 45,
-		width: 45,
-		left: 45,
-		top: 5
+		backgroundImage: 'images/NewMemo.png',
+		height: 42,
+		width: 42,
+		left: 300,
+		top: 20
 	});
 	newMemoButton.addEventListener('click', function(e) {
 		navGroup.openWindow(createMemoTagsWindow);
 	});
-	masterContainerWindow.add(newMemoButton);
+	masterContainerWindow.rightNavButton = newMemoButton;
 
-	var button = Ti.UI.createButton({
-		systemButton: Ti.UI.iPhone.SystemButton.REFRESH
-	});
-	button.addEventListener('click', function(e) {
-		refreshMemo();
-	});
-	masterContainerWindow.rightNavButton = button;
 	
 	//create detail view container
 	var detailContainerWindow = Ti.UI.createWindow({
@@ -68,7 +62,6 @@ function ApplicationWindow() {
 
 	//add behavior for master view
 	masterView.addEventListener('itemSelected', function(e) {
-		detailView.fireEvent('itemSelected', e);
 		navGroup.openWindow(detailContainerWindow);
 	});
 	
@@ -79,7 +72,6 @@ function ApplicationWindow() {
 				memos.push(new Memo('Adina', 'my memo number '+i, 'tag'+i));	
 			}
 		}
-		
 		masterView.refreshMemoTable(memos);
 	};
 	

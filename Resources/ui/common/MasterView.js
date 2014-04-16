@@ -8,7 +8,6 @@ function MasterView() {
 	});
 
 	var table = Ti.UI.createTableView({
-		top: 55
 	});
 	self.add(table);
 
