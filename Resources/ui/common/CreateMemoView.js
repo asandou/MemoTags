@@ -1,5 +1,5 @@
 
-function CreateMemoView(closeCurrentWindow, refresh, memos) {
+function CreateMemoView(refresh, memos) {
 	var Memo = require('src/Memo');
 	
 	var self = Ti.UI.createView({
@@ -33,7 +33,6 @@ function CreateMemoView(closeCurrentWindow, refresh, memos) {
 		memos.push(memo);
 		editBox.setValue('');
 		refresh(memos);
-		closeCurrentWindow();
 	});
 	self.add(createButton);
 	

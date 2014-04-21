@@ -1,5 +1,5 @@
 //Master View Component Constructor
-function MasterView() {
+function MasterView(detailView) {
 	var MemoRow = require('ui/common/MemoTableViewRow');
 	
 	//create object instance, parasitic subclass of Observable
@@ -13,7 +13,9 @@ function MasterView() {
 
 	//add behavior
 	table.addEventListener('click', function(e) {
-		console.log('click triple click !!');
+		self.fireEvent('memoSelected', {
+			index: e.index
+		});
 	});
 	
 	self.refreshMemoTable = function(data) {
