@@ -1,8 +1,20 @@
 
-function CreateMemoView(refresh, memos) {
+function MemoCreationWindow(refresh, memos) {
 	var Memo = require('src/Memo');
 	
-	var self = Ti.UI.createView({
+	var self = Ti.UI.createWindow({
+		title: 'Create new memo'
+	});
+	
+	var backCreateMemoButton = Ti.UI.createButton({
+		title: '< Back'
+	});
+	self.leftNavButton = backCreateMemoButton;
+	backCreateMemoButton.addEventListener('click', function(){
+		self.close();
+	});
+		
+	var view = Ti.UI.createView({
 		backgroundColor:'e3e3e3'
 	});
 	
@@ -18,9 +30,9 @@ function CreateMemoView(refresh, memos) {
 	    textAlign: 'left',
 		width: 300,
 		height: 300,
-		top: 5
+		top: 10
 	});
-	self.add(editBox);
+	view.add(editBox);
 	
 	var createButton = Ti.UI.createButton({
 		title: 'Create',
@@ -34,11 +46,13 @@ function CreateMemoView(refresh, memos) {
 		editBox.setValue('');
 		refresh(memos);
 	});
-	self.add(createButton);
+	view.add(createButton);
+	
+	self.add(view);
 	
 	return self;
 };
 
 
 
-module.exports = CreateMemoView;
+module.exports = MemoCreationWindow;

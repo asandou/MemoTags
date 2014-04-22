@@ -1,43 +1,50 @@
 function ApplicationWindow() {
 	//declare module dependencies
-	var MainScrollableView = require('ui/common/MainScrollableView'),
-		MasterView = require('ui/common/MasterView'),
-		DetailView = require('ui/common/DetailView'),
-		CreateMemoView = require('ui/common/CreateMemoView');
-		Memo = require('src/Memo');
-
+	var MemoDetailWindow = require('ui/common/MemoDetailWindow'),
+		MemoListWindow = require('ui/common/MemoListWindow'),
+		MemoCreationWindow = require('ui/common/MemoCreationWindow'),
+		MasterContainerWindow = require('ui/handheld/ios/MasterContainerWindow');
+	
 	//create static memo array
 	var memos = [];
-	var detailView = DetailView();
-	var masterView = MasterView(detailView);
-	var createMemoView = CreateMemoView(masterView.refreshMemoTable, memos);
 	
-	//construct UI
-	//create master view container
-	var masterContainerWindow = Ti.UI.createWindow({
-		title:'Welcome to MemoTags',
-		backgroundColor:'e3e3e3',
-		navTintColor: 'e3e3e3'
-		//navBarHidden: true
+	var navGroup = Ti.UI.iOS.createNavigationWindow();
+	
+	var memoDetailWindow = new MemoDetailWindow();
+	var memoListWindow = new MemoListWindow(navGroup.openWindow, memoDetailWindow, memos);
+	var memoCreationWindow = new MemoCreationWindow(memoListWindow.RefreshMemoTable, memos);
+	
+	navGroup.setWindow(memoListWindow);
+	//for android : https://developer.appcelerator.com/question/122368/android-equivalent-of-navigation-group)
+	
+	var newMemoButton = Ti.UI.createButton({
+		backgroundImage: 'images/NewMemo.png',
+		height: 42,
+		width: 42,
+		left: 300,
+		top: 20
+	});
+	memoListWindow.rightNavButton = newMemoButton;
+	
+	newMemoButton.addEventListener('click', function(e) {
+		navGroup.openWindow(memoCreationWindow);
 	});
 	
-	var mainScrollableView = new MainScrollableView(memos, masterView, detailView, createMemoView);
-	masterContainerWindow.add(mainScrollableView);
-	
-	// refresh window function
-	function refreshMemo() {
-		//statically initialize the array
-		if(memos.length === 0) {
-			for(var i=0; i<5; i++) {
-				memos.push(new Memo('Adina', 'my memo number '+i, 'tag'+i));	
-			}
-		}
-		masterView.refreshMemoTable(memos);
-	};
-	
-	refreshMemo();
+	// refresh and initialize window function
+	this.InitMemoList(memos, memoListWindow.RefreshMemoTable);
 
-	return masterContainerWindow;
+	return navGroup;
+};
+
+ApplicationWindow.prototype.InitMemoList = function(memos, refreshMemoTable) {
+	var Memo = require('src/Memo');	
+	//statically initialize the array
+	if(memos.length === 0) {
+		for(var i=0; i<5; i++) {
+			memos.push(new Memo('Adina', 'My memo number '+i, 'tag'+i));	
+		}
+	}
+	refreshMemoTable(memos);
 };
 
 module.exports = ApplicationWindow;
